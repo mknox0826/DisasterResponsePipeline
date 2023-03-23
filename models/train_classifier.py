@@ -44,7 +44,7 @@ def load_data(database_filepath):
     
     df = df.drop(columns=['child_alone'])
     X = df.message.values
-    Y = df.drop(['id','message','original','genre'], axis=1)
+    Y = df.iloc[:,4:]
     category_names = Y.columns
     
     
