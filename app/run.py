@@ -71,9 +71,18 @@ def index():
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
     
+    category_names = df.iloc[:,4:].columns
+    category_counts = df.iloc[:,4:].sum().values
+    
+    request_count = df[df['request']==1].groupby('genre').count()['message']
+    request_genres = list(request_count.index)
+    
+
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
+        
+        # Graph 1- Genre Distribution
         {
             'data': [
                 Bar(
@@ -84,6 +93,49 @@ def index():
 
             'layout': {
                 'title': 'Distribution of Message Genres',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Genre"
+                }
+            }
+        },
+        
+        # Graph 2 - Category Distribution
+        
+        {
+            'data': [
+                Bar(
+                    x=category_names,
+                    y=category_counts
+                )
+            ],
+
+            'layout': {
+                'title': 'Distribution of Message Categories',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Category",
+                    'tickangle': 25
+                }
+            }
+        },
+        
+        # Graph 3- Distribution of Request Messages by Genre 
+        
+        {
+            'data': [
+                Bar(
+                    x=request_genres,
+                    y=request_count
+                )
+            ],
+
+            'layout': {
+                'title': 'Distribution of Request Messages by Genre',
                 'yaxis': {
                     'title': "Count"
                 },
