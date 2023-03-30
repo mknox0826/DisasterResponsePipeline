@@ -62,9 +62,6 @@ def clean_data(df):
     # Drop duplicates
     df = df.drop_duplicates()
     
-    # Drop nulls
-    df.dropna(inplace=True)
-    
     return df
     
 def save_data(df, database_filename):
